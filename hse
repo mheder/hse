@@ -11,13 +11,17 @@
 # On top of that, commands are instantly saved, unlike with the regular bash history that saves on bash exit and loses
 # the history when your bash session is terminated unexpectedly, like when your ssh connection drops.
 #
-# Usage: 
+# Installation: 
 # 
 # 1) put this file to ~/bin/ or any other suitable location
 # 2) to the end of your .bashrc add the following line:
 # source ~/bin/hse
+# 
+# Usage: 
 #
-#
+# hse <search term>
+# this will grep in the files saved at .hse_history. Alternatively, you can grep any way you want in those files.
+
 
 alias history_update='mkdir -p $HOME/.hse_history ; FNAME=`date +%Y_%m_%d` ; echo "`date +%H:%M:%S` |`history 1|sed -e "s/^[^0-9]*[0-9]*//g"`" >> $HOME/.hse_history/"$USER"_"$FNAME"'
 
