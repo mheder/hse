@@ -12,5 +12,5 @@ On top of that, commands are instantly saved, unlike with the regular bash histo
 ```source ~/bin/hse```
 
 ## Usage:
-```hse <search term>```
+```$ hse <search term>```
 this will grep in the files saved at .hse_history. Alternatively, you can grep any way you want in those files.
