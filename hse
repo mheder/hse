@@ -1,0 +1,30 @@
+#!/bin/bash
+
+#
+# History Search Engine (hse) by
+#	Mihály Héder 2006-2009
+#
+# What hse does:
+#
+# hse creates a directory named ~/.hse_history and writes the commands 
+# you issue into files, one file per day. This way, you have an unlimited, date-indexed history of issued commands.
+# On top of that, commands are instantly saved, unlike with the regular bash history that saves on bash exit and loses
+# the history when your bash session is terminated unexpectedly, like when your ssh connection drops.
+#
+# Usage: 
+# 
+# 1) put this file to ~/bin/ or any other suitable location
+# 2) to the end of your .bashrc add the following line:
+# source ~/bin/hse
+#
+#
+
+alias history_update='mkdir -p $HOME/.hse_history ; FNAME=`date +%Y_%m_%d` ; echo "`date +%H:%M:%S` |`history 1|sed -e "s/^[^0-9]*[0-9]*//g"`" >> $HOME/.hse_history/"$USER"_"$FNAME"'
+
+export HISTTIMEFORMAT=""
+
+export HISTCONTROL=""
+
+export PROMPT_COMMAND='history_update'
+
+hse() { if [ $# -ne 1 ] ; then echo "usage: hse <search parameter>" ; else for i in $HOME/.hse_history/* ; do if [ `grep -c "$1" $i` -gt 0 ] ; then basename $i ; grep "$1" $i ; echo ; fi ; done ; fi }
